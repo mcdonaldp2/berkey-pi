@@ -15,3 +15,6 @@ The repo contains a configuration file "berkey-fill-alert-config.example.json" w
 Here is the sensor used: https://www.amazon.com/gp/product/B07ZMGW3QJ/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&psc=1
 ![GPIO Sensor Diagram](https://images-na.ssl-images-amazon.com/images/I/71qAZOYICVL._SL1500_.jpg)
 
+### Final setup
+![Rpi + Sensor + Berkey](https://i.imgur.com/yxxg6tf.jpg)
+[Example video](https://i.imgur.com/auL8GZy.mp4)
