@@ -9,9 +9,8 @@ from datetime import datetime,date
 import calendar
 import sqlite3
 
-
 def getConfig():
-	with open('/home/pi/berkey-fill-alert-config.json') as f:
+	with open(os.path.dirname(os.path.realpath(__file__)) + '/berkey-pi.config.json') as f:
 		data = json.load(f)
 		return data
 
@@ -35,7 +34,7 @@ def logFillToDB():
 def sendAlertEmail(config):
 	server= smtplib.SMTP(config['smtp_server'], config['smtp_port'])
 	server.starttls()
-	server.login(config['smtp_auth_user'], config['smtp_auth_password'])
+	server.login(config['smtp_auth_user'], os.environ.get('BERKEYPI_SMTP_PASSWORD'))
 	msg="\r\n\r\n The Berkey is almost full! time: " + datetime.now().strftime('%Y-%m-%d %H:%M:%S') + "\r\n\r\n"
 	server.sendmail(config['berkey_alert_from'], config['berkey_alert_recipients'],msg)
 
@@ -45,13 +44,12 @@ def main():
 	setupIO()
 	config = getConfig()
 
-	i = True
 	isInWater = False
 	timeInWater = 0
 	maxTimeInWater = 1
 
 
-	while i != False:
+	while True:
 		isInWater = GPIO.input(18) == 1
 		
 		if  isInWater:
@@ -64,7 +62,6 @@ def main():
 			sendAlertEmail(config)
 			logFillToDB()
 		time.sleep(1)
-
 
 main()
 

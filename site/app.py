@@ -5,32 +5,33 @@ import os
 
 app=Flask(__name__)
 
-
+def getSQLiteConnection():
+	return sqlite3.connect(os.path.dirname(os.path.realpath(__file__)) + '/../berkeydata')
 
 def getFillsThisWeek():
-	connection = sqlite3.connect(os.path.dirname(os.path.realpath(__file__)) + "/berkeydata")
+	connection = getSQLiteConnection()
 	cursor = connection.cursor()
 	cursor.execute(
 		"select FillId, FillTime, FillDayOfWeek from BerkeyFillLog where datetime(FillTime) >= datetime(date('now'), 'weekday 6', '-6 days') and datetime(FillTime) <= datetime(date('now'), 'weekday 6') order by datetime(FillTime) ASC;"
 	)
 	rows = cursor.fetchall()
 
-	connection.close();
-	return rows;
+	connection.close()
+	return rows
 
 def getFillsLastWeek():
-        connection = sqlite3.connect(os.path.dirname(os.path.realpath(__file__)) + "/berkeydata")
+        connection = getSQLiteConnection()
         cursor = connection.cursor()
         cursor.execute(
                 "select FillId, FillTime, FillDayOfWeek from BerkeyFillLog where datetime(fillTime) >= datetime(date('now'), 'weekday 6', '-6 days', '-7 days') and datetime(FillTime) <= datetime(date('now'), 'weekday 6', '-6 days') order by datetime(FillTime) ASC;"
         )
         rows = cursor.fetchall()
 
-        connection.close();
-        return rows;
+        connection.close()
+        return rows
 
 def getTotalFills():
-	connection = sqlite3.connect(os.path.dirname(os.path.realpath(__file__)) + "/berkeydata")
+	connection = getSQLiteConnection()
 	cursor = connection.cursor()
 
 	cursor.execute(
@@ -42,16 +43,16 @@ def getTotalFills():
 	return rows[0][0]
 
 def getYTDFills():
-        connection = sqlite3.connect(os.path.dirname(os.path.realpath(__file__)) + "/berkeydata")
-        cursor = connection.cursor()
+	connection = getSQLiteConnection()
+	cursor = connection.cursor()
 
-        cursor.execute(
-                "select COUNT(*) from BerkeyFillLog where datetime(FillTime) >= datetime('now', 'start of year')"
-        )
-        rows = cursor.fetchall()
-        connection.close()
+	cursor.execute(
+			"select COUNT(*) from BerkeyFillLog where datetime(FillTime) >= datetime('now', 'start of year')"
+	)
+	rows = cursor.fetchall()
+	connection.close()
 
-        return rows[0][0]
+	return rows[0][0]
 
 
 @app.route('/')

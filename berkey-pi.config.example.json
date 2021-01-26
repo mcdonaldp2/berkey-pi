@@ -2,7 +2,6 @@
 	"smtp_server": "<your smtp server>",
 	"smtp_port":  587,
 	"smtp_auth_user": "<email for SMTP>",
-	"smtp_auth_password": "<password for SMTP>",
 	"berkey_alert_from": "<email>",
 	"berkey_alert_recipients": "<email recipient>"
 }

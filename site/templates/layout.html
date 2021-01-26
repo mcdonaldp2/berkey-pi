@@ -3,12 +3,12 @@
   <head>
     {% block head %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>{% block title %}{% endblock %} - Berkey Fills Analytics</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">    <title>{% block title %}{% endblock %} - BerkeyPi</title>
     {% endblock %}
   </head>
   <body>
 	<nav class="navbar navbar-dark bg-dark" style="margin-bottom:20px">
-		<a class="navbar-brand" href="#">Berkey Fill Analytics</a>
+		<a class="navbar-brand" href="#">BerkeyPi</a>
 	</nav>
     
     <div id="content">{% block content %}{% endblock %}</div>

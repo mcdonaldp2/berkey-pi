@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<h3 class="text-center mx-auto">How much water does the McDonald family use from the berkey each week?</h3>
+		</div>
+		<div class="row" style="margin-top:15px">
+			<div class="col-md-6">
+				<div class="card mx-auto" style="">
+					<div class="card-header">
+						YTD Fills
+					</div>
+					<div class="card-body">
+						<h3 class="card-text">
+								{{YTDFills}} Fill(s) or {{YTDFills * 2.5}} Gallons
+						</h3>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card mx-auto" style="">
+					<div class="card-header">
+						Total Fills
+					</div>
+					<div class="card-body">
+						<h3 class="card-text">
+							{{TotalFills}} Fill(s) or {{TotalFills * 2.5}} Gallons
+						</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				 <div class="card mx-auto">
+				  <div class="card-header">
+				  	Last Week
+				  </div>
+				  <div class="card-body">
+					<h3 class="card-text">
+						{{FillsLastWeek|length}} Fill(s) or {{FillsLastWeek|length * 2.5}} Gallons
+					</h3>			   
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Time of Fill</th>
+								<th scope="col">Day of Week</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for fill in FillsLastWeek %}
+								<tr>
+										<th scope="row">{{loop.index0 + 1}}</th>
+										<td>{{fill[1]}} </td>
+										<td>{{fill[2]}}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table> 
+				  </div>
+				</div>
+			</div>
+			<div class="col-md-6">
+					<div class="card mx-auto">
+						<div class="card-header">
+							This Week So Far
+						</div>
+						<div class="card-body">
+							<h3 class="card-text">
+									{{FillsThisWeek|length}} Fill(s) or {{FillsThisWeek|length * 2.5}} Gallons
+							</h3>
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Time of Fill</th>
+										<th scope="col">Day of Week</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for fill in FillsThisWeek %}
+									<tr>
+										<th scope="row">{{loop.index0 + 1}}</th>
+											<td>{{fill[1]}} </td>
+										<td>{{fill[2]}}</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+{% endblock %}
