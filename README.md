@@ -4,10 +4,6 @@ I hate sitting and waiting for my [big berkey](https://www.usaberkeyfilters.com/
 ## configuration
 The repo contains a configuration file "berkey-pi.config.example.json" when running the sensor script this should be renamed to "berkey-pi.config.json" and the details needed should be filled in in the config.  
 
-### Environment Setup on Raspberry Pi Zero
-password for SMTP authentication is stored in the BERKEYPI_SMTP_PASSWORD environment variable.  This can be set in the /etc/rc.local file on your rPi if you are planning on executing this code during boot or /etc/profile for executing after login.  To preserve the environment variables  when running the berkey-pi.py script from bash with sudo, use -E flag.  Example:
-    `sudo python -E berkey-pi.py`
-
 ### packages installed on Raspberry Pi Zero (raspbian OS)
 * ssmtp 
 * rpi.gpio

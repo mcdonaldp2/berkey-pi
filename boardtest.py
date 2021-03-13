@@ -29,37 +29,29 @@ def send_alert_email(config):
 
 	server.quit()
 
-def blink_led(current_time, alert_time):
-	is_on = GPIO.input(4) == 1
-	state = 0 if is_on else 1
-	GPIO.output(4, state)
-
 def main():
 	setup_io()
-	config = get_config()
+	GPIO.output(4, 1)
+	time.sleep(1)
+	GPIO.output(4, 0)
+	# config = get_config()
 
-	is_in_water = False
-	time_in_water = 0
-	max_time_in_water = 1
-	alert_time = 10
+	# is_in_water = False
+	# time_in_water = 0
+	# max_time_in_water = 1
 
-	while True:
-		is_in_water = GPIO.input(18) == 1
+	# while True:
+	# 	is_in_water = GPIO.input(18) == 1
 
-		if is_in_water:
-			time_in_water += 1
-		else:
-			GPIO.output(4, 0)
-			time_in_water = 0
+	# 	if is_in_water:
+	# 		time_in_water += 1
+	# 	else:
+	# 		time_in_water = 0
 		
-		if time_in_water == max_time_in_water:
-			output_alert(time_in_water, alert_time)
-			send_alert_email(config)
-			berkeydb.log_fill()
-		elif time_in_water > 0:
-			output_alert(time_in_water, alert_time)
-
-		time.sleep(1)
+	# 	if time_in_water == max_time_in_water:
+	# 		send_alert_email(config)
+	# 		berkeydb.log_fill()
+	# 	time.sleep(1)
 
 if __name__ == "__main__":
    main()

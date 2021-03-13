@@ -1,1 +1,3 @@
 berkey-pi.config.json
+*.pyc
+berkey.db
