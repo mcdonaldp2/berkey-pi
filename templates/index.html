@@ -63,7 +63,7 @@
 					</div>
 					<div class="card-body">
 						<h3 class="card-text">
-								{{YTDFills}} Fill(s) or {{YTDFills * 2.5}} Gallons
+								{{YTDFills}} Fill(s){% if TankSize is not none%} or {{YTDFills * TankSize}} Gallons {% endif %} 
 						</h3>
 					</div>
 				</div>
@@ -75,7 +75,7 @@
 					</div>
 					<div class="card-body">
 						<h3 class="card-text">
-							{{TotalFills}} Fill(s) or {{TotalFills * 2.5}} Gallons
+							{{TotalFills}} Fill(s){% if TankSize is not none %} or {{TotalFills * TankSize}} Gallons {% endif %}
 						</h3>
 					</div>
 				</div>

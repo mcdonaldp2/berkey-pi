@@ -9,6 +9,15 @@ import berkeydb
 
 app=Flask(__name__)
 
+def get_tanksize(berkey_config, berkey_models):
+	tanksize = None
+	if (berkey_config.model_id != None):
+		for model in berkey_models:
+			if model.model_id == berkey_config.model_id:
+				tanksize = model.tank_size
+	return tanksize
+
+
 @app.route('/set-config', methods = ['POST'])
 def set_config():
 	response = berkeydb.upsert_berkeyconfig(request.form)
@@ -22,6 +31,7 @@ def index():
 	fills_last_week = berkeydb.get_fills_last_week()
 	total_fills = berkeydb.get_total_fills()
 	ytd_fills = berkeydb.get_ytd_fills()
+	tank_size = get_tanksize(berkey_config, berkey_models)
 	return render_template(
 		'index.html', 
 		title='Home', 
@@ -30,7 +40,8 @@ def index():
 		FillsLastWeek=fills_last_week, 
 		FillsThisWeek=fills_this_week, 
 		TotalFills=total_fills, 
-		YTDFills = ytd_fills)
+		YTDFills = ytd_fills,
+		TankSize = tank_size)
 
 if  __name__ == '__main__':
 	app.run(debug=True, host='0.0.0.0')
